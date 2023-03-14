@@ -1,13 +1,17 @@
-What is the factor of a good quality coffee
+Guess the Quality!
 ================
 Group 12
-2023-03-14
 
-# Introduction
+## Introduction
 
-For this research we want to know what is the factor that influence the
-quality of coffee. First we want to look at the distribution of the
-data.
+The data set here, is coming from the Coffee Quality Database which is a
+database that contains information from the Coffee Quality Institute
+which is a non-profit organisation working internationally to improve
+the quality of coffee and the lives of the people who produce it. Here,
+in this project, we are trying to answer the question “What influence do
+different features of coffee have on whether the quality of a batch of
+coffee is classified as good or poor?”  
+For this purpose, firstly, we read the data set.
 
 ``` r
 coffee_data <- read.csv("dataset12.csv")
@@ -15,10 +19,10 @@ coffee_data <- read.csv("dataset12.csv")
 
 ## Data distribution
 
-### The Country origin of the coffee
+#### The Country of origin of the coffee
 
-Below is the percentage of good and bad quality coffee for each origin
-of the coffee.
+We take a look at the percentages of good and bad qualities of coffees
+with respect to it’s country of origin.
 
 ``` r
 #Check the percentage of good and poor quality coffee for each country of origin
@@ -67,10 +71,9 @@ coffee_data %>%
       United States (Puerto Rico)  50.0%   (1)  50.0%   (1)
                           Vietnam  57.1%   (4)  42.9%   (3)
 
-From the figure below, we can see that the good quality coffee come from
-the countries with gradient red, orange and green, meanwhile the poor
-quality coffee come from the countries with gradient blue and pink.But
-the difference is not significant.
+Inorder to get a clear picture of which countries coffee beans are
+mostly of good and bad quality, we can plot the quality based on the
+country of origin in gradient scale.
 
 ``` r
 #Plot the distribution of coffee quality class based on the origin
@@ -84,11 +87,16 @@ ggplot(coffee_data, aes(y = Qualityclass)) +
 
 ![](DAS-Group-12_files/figure-gfm/plotting%20origin-1.png)<!-- -->
 
+From the figure above, we can see that the color gradient is larger in
+the red area in case of the good quality coffee while that of blue is
+dominant in case of bad quality coffee.But the difference is not highly
+significant.
+
 ### The Aroma of the coffee
 
-Another variable of interest is the **aroma** of the coffee, here we
-want to see how the **aroma** of the coffee distributed around the
-quality of the coffee.
+Let’s consider the next variable of interest, which is the aroma of the
+coffee. Here we want to see how the aroma of the coffee is distributed
+around the quality of the coffee.
 
 ``` r
 #Plot the distribution of coffee quality class based on the aroma
@@ -102,16 +110,10 @@ ggplot(data = coffee_data, aes(x = Qualityclass, y = aroma)) +
 
 ![](DAS-Group-12_files/figure-gfm/plotting%20aroma1-1.png)<!-- -->
 
-Rescale the distribution of Aroma of the coffee
-
-It is hard to get the picture of the distribution, because of the
-present of outlier in this distribution. So we try to rescale the
-boxplot to get better visual of the distribution. From the boxplot below
-we can see that poor quality coffee has lower value of the aroma of the
-coffee.
-
-Please note that for the rest of boxplot figure, we rescale them in
-order to make the clearer representation of the distribution.
+From the boxplot above, it is hard to get the picture of the
+distribution, because of the presence of outliers in this distribution.
+So we try to rescale the boxplot to get better visual of the
+distribution.
 
 ``` r
 #Rescaling the plot
@@ -123,9 +125,17 @@ ggplot(data = coffee_data, aes(x = Qualityclass, y = aroma)) +
        y = "Aroma")
 ```
 
-![](DAS-Group-12_files/figure-gfm/plotting%20aroma2-1.png)<!-- -->
+![](DAS-Group-12_files/figure-gfm/plotting%20aroma2-1.png)<!-- --> From
+the boxplot above, we can see that a low value of aroma of the coffee
+corresponds to poor quality.
 
-### Flavour
+Please note that for the rest of boxplot figure, we use the rescaled
+data in order to make the clearer representation of the distribution.
+
+### Flavor
+
+Here, we consider the next variable, flavor of the coffee with respect
+to the quality.
 
 ``` r
 ggplot(data = coffee_data, aes(x = Qualityclass, y = flavor)) +
@@ -138,7 +148,12 @@ ggplot(data = coffee_data, aes(x = Qualityclass, y = flavor)) +
 
 ![](DAS-Group-12_files/figure-gfm/plotting%20flavor-1.png)<!-- -->
 
+From the boxplot above, we can understand that a coffee is labelled as
+good if it has a high flavor grade.
+
 ### Acidity
+
+Considering acidity grade with respect to the class of quality.
 
 ``` r
 ggplot(data = coffee_data, aes(x = Qualityclass, y = acidity)) +
@@ -151,7 +166,12 @@ ggplot(data = coffee_data, aes(x = Qualityclass, y = acidity)) +
 
 ![](DAS-Group-12_files/figure-gfm/plotting%20acidity-1.png)<!-- -->
 
-### category_two_defects
+We can see that higher the acidity grade, better the coffee quality.
+
+### Category 2 defects
+
+This variable contains the number of times category 2 type defect was
+found in the batch of coffee beans tested.
 
 ``` r
 ggplot(data = coffee_data, aes(x = Qualityclass, y =    category_two_defects)) +
@@ -164,7 +184,10 @@ ggplot(data = coffee_data, aes(x = Qualityclass, y =    category_two_defects)) +
 
 ![](DAS-Group-12_files/figure-gfm/plotting%20category%20two%20defect-1.png)<!-- -->
 
-### altitude_mean_meters
+As we can see, category 2 type defects were more in poor quality coffee
+beans.
+
+### Mean altitude of the growers farm
 
 ``` r
 ggplot(data = coffee_data, aes(x = Qualityclass, y =    altitude_mean_meters)) +
@@ -176,6 +199,9 @@ ggplot(data = coffee_data, aes(x = Qualityclass, y =    altitude_mean_meters)) +
 ```
 
 ![](DAS-Group-12_files/figure-gfm/plotting%20altitude%20mean%20(meters)-1.png)<!-- -->
+
+From the boxplot, we can analyse that as the mean altitude increases,
+the coffee quality also increases.
 
 ### Year Harvested
 
@@ -193,7 +219,7 @@ ggplot(data = coffee_data, aes(x = Qualityclass, group = harvested)) +
 
 ### Using Generalized Linear Model
 
-+Model 1: using All variable
+Model 1: using all the available variables
 
 ``` r
 coffee_data$binary_response <- ifelse(coffee_data$Qualityclass == "Good", 1, 0)
@@ -306,12 +332,16 @@ summary()
 
         Null deviance: 1188.88  on 857  degrees of freedom
     Residual deviance:  426.01  on 818  degrees of freedom
-      (因为不存在，174个观察量被删除了)
+      (174 observations deleted due to missingness)
     AIC: 506.01
 
     Number of Fisher Scoring iterations: 17
 
-+Model 2 excluding **Country of origin**.
+As we can see, if we consider the country of origin, that would be way
+too many explanatory variables. So, lets remove that particular variable
+and fit the model again.
+
+Model 2 (excluding **Country of origin**).
 
 ``` r
 mod.coffee2 <- glm(binary_response ~ aroma + flavor + acidity +  category_two_defects + altitude_mean_meters + harvested, 
@@ -346,12 +376,12 @@ summary()
 
         Null deviance: 1188.88  on 857  degrees of freedom
     Residual deviance:  516.51  on 851  degrees of freedom
-      (因为不存在，174个观察量被删除了)
+      (174 observations deleted due to missingness)
     AIC: 530.51
 
     Number of Fisher Scoring iterations: 7
 
-+Model 3 excluding **Country of origin** and **category two defect**.
+Model 3 (excluding **Country of origin** and **category two defect**).
 
 ``` r
 mod.coffee3 <- glm(binary_response ~ aroma + flavor + acidity +    altitude_mean_meters + harvested, 
@@ -384,13 +414,13 @@ summary()
 
         Null deviance: 1188.88  on 857  degrees of freedom
     Residual deviance:  516.75  on 852  degrees of freedom
-      (因为不存在，174个观察量被删除了)
+      (174 observations deleted due to missingness)
     AIC: 528.75
 
     Number of Fisher Scoring iterations: 7
 
-+Model 4 excluding **Country of origin**, **category two defect** and
-**year of harvested**.
+Model 4 (excluding **Country of origin**, **category two defect** and
+**year of harvested**)
 
 ``` r
 mod.coffee4 <- glm(binary_response ~ aroma + flavor + acidity + altitude_mean_meters, 
@@ -422,7 +452,7 @@ summary()
 
         Null deviance: 1205.70  on 869  degrees of freedom
     Residual deviance:  523.68  on 865  degrees of freedom
-      (因为不存在，162个观察量被删除了)
+      (162 observations deleted due to missingness)
     AIC: 533.68
 
     Number of Fisher Scoring iterations: 7
@@ -454,7 +484,7 @@ Hence we conduct 3 different model for this study, they are:
 ### Model Comparison
 
 From the models we try to compare the values in order to decide which
-model fit the data better. The summary of model is presented in the
+model fits the data better. The summary of model is presented in the
 table below:
 
 ``` r
@@ -482,49 +512,14 @@ bind_rows(model.comp.values.1, model.comp.values.2,
 
 Model comparison values for different models
 
-In order to choose the best fit for our model, we choose the model with
-low AIC, BIC and large deviance. From the table above, we can see that
-model 1 has the highest BIC, so the model 3 is the best fit according to
-the table .
+To choose the best fit for our model, we choose the model with low AIC,
+BIC and large deviance. From the table above, we can see that model 1
+has the highest BIC, so model 3 is the best fit compared to the erst.
 
-After choosing model 3 from above, then we look at the summary of the
-model:
+Now, lets look at the summary of model 3:
 
 ``` r
 #Presenting summary model 3
-mod.coffee3 %>% summary()
-```
-
-
-    Call:
-    glm(formula = binary_response ~ aroma + flavor + acidity + altitude_mean_meters + 
-        harvested, family = binomial(link = "logit"), data = coffee_data)
-
-    Deviance Residuals: 
-        Min       1Q   Median       3Q      Max  
-    -4.0229  -0.3544  -0.0028   0.4208   3.2322  
-
-    Coefficients:
-                           Estimate Std. Error z value Pr(>|z|)    
-    (Intercept)          -1.867e+02  1.226e+02  -1.523    0.128    
-    aroma                 4.340e+00  6.993e-01   6.206 5.43e-10 ***
-    flavor                7.362e+00  8.858e-01   8.311  < 2e-16 ***
-    acidity               3.798e+00  7.028e-01   5.404 6.50e-08 ***
-    altitude_mean_meters -1.291e-05  2.449e-05  -0.527    0.598    
-    harvested             3.457e-02  6.048e-02   0.572    0.568    
-    ---
-    Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-    (Dispersion parameter for binomial family taken to be 1)
-
-        Null deviance: 1188.88  on 857  degrees of freedom
-    Residual deviance:  516.75  on 852  degrees of freedom
-      (因为不存在，174个观察量被删除了)
-    AIC: 528.75
-
-    Number of Fisher Scoring iterations: 7
-
-``` r
 summ(mod.coffee3)
 ```
 
@@ -748,8 +743,11 @@ harvested
 </tfoot>
 </table>
 
+Now, lets take a look at the confidence intervals of the explanatory
+variables:
+
 ``` r
-confint(mod.coffee3) %>%
+confint(mod.coffee3)%>%
   kable()
 ```
 
@@ -763,17 +761,17 @@ confint(mod.coffee3) %>%
 | harvested            |   -0.0841084 |  0.1534155 |
 
 We can see the p values for **altitude_mean_meters** and **harvested**
-two variables are 0.60 and 0.57 respectively, both are large than 0.05.
-The CIs for this two variables are also contain the zero. According to
-this two reasons, we need drop **altitude_mean_meters** and
-**harvested**.
+are 0.60 and 0.57 respectively, both are large than 0.05. The confident
+intervals for these two variables also contain zero. That means, they
+are not significant. So, we drop the variables **altitude_mean_meters**
+and **harvested**.
 
 ### Model summary
 
-The final model contains aroma flavor and acidity this three explanatory
-variables.
+The final model contains three explanatory variables aroma, flavor and
+acidity.
 
-we need summary the **final model** again:
+We then check the summary of this **final model**:
 
 ``` r
 mod.final <- glm(binary_response ~ aroma + flavor + acidity, 
@@ -808,9 +806,12 @@ summary()
 
     Number of Fisher Scoring iterations: 7
 
+We can see that all the variables are significant and the AIC value is
+650.46
+
 ### Log odds plot
 
-Finally we look at the plot of the log odds from our model
+Finally, we look at the plot of the log odds of our final model:
 
 ``` r
 #plotting log odds
@@ -822,17 +823,19 @@ plot_model(mod.final, show.values = TRUE, transform = NULL,
 
 We interpret the odds ratios as follows:
 
--   for each increase in the aroma value of the coffee, their odds of
-    being good quality coffee increase (by a factor of 4.30),
+- for each unit increase in the aroma grade of the coffee, their odds of
+  being good quality coffee increases (by a factor of 4.30),
 
--   for each increase in the flavor value of the coffee, their odds of
-    being good quality coffee increase (by a factor of 7,15),
+- for each unit increase in the flavor grade of the coffee, the odds of
+  it being good quality coffee increases (by a factor of 7.15),
 
--   the more acidic the coffee, their odds of being good quality coffee
-    increase (by a factor of 3.16),
+- the more acidic the coffee, their odds of being good quality coffee
+  increases (by a factor of 3.16)
+
+### Probability of the coffee being good quality by 3 factors:
 
 ``` r
-plot_model(mod.final, type = "pred", title = "Probability of coffee quality being good by three factors",
+plot_model(mod.final, type = "pred", title = "Probability of coffee quality being good by the 3 different factors",
             axis.title = c(mod.final$colnumes,"Prob. of coffee quality being good")) 
 ```
 
