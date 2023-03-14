@@ -2,7 +2,8 @@
 title: "What is the factor of a good quality coffee"
 author: "Group 12"
 date: "2023-03-14"
-output: html_document
+#output: html_document
+output: github_document
 ---
 
 
