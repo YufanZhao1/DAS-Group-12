@@ -1,4 +1,4 @@
-Guess the Quality!
+Find the factor of good quality coffee!
 ================
 Group 12
 
