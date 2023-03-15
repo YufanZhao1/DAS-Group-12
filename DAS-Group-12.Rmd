@@ -91,6 +91,7 @@ ggplot(data = coffee_data, aes(x = Qualityclass, y = aroma)) +
 Rescale the distribution of Aroma of the coffee
 
 It is hard to get the picture of the distribution, because of the present of outlier in this distribution. So we try to rescale the boxplot to get better visual of the distribution.
+
 From the boxplot below we can see that poor quality coffee has lower value of the aroma of the coffee. 
 
 Please note that for the rest of boxplot figure, we rescale them in order to make the clearer representation of the distribution.
@@ -120,6 +121,7 @@ ggplot(data = coffee_data, aes(x = Qualityclass, y = flavor)) +
        y = "flavor")
 ```
 
+As can be seen from the above boxplot, the poor quality coffee has lower flavour value than good quality coffee.
 
 
 
@@ -135,7 +137,7 @@ ggplot(data = coffee_data, aes(x = Qualityclass, y = acidity)) +
        y = "acidity")
 ```
 
-
+We can find that the acidity grade of poor quality coffee is much lower.
 
 
 ### category_two_defects
@@ -150,7 +152,7 @@ ggplot(data = coffee_data, aes(x = Qualityclass, y =    category_two_defects)) +
        y = "category_two_defects")
 ```
 
-
+The counts of category 2 type defects in the batch of coffee beans tested between good quality and poor quality coffee are similar. And both of them have many outliers.
 
 
 ### altitude_mean_meters 
@@ -166,6 +168,8 @@ ggplot(data = coffee_data, aes(x = Qualityclass, y =    altitude_mean_meters)) +
        y = "altitude_mean_meters")
 ```
 
+We can see that the mean altitude of the growers farm of good quality coffee is a little higher.
+
 
 
 ### Year Harvested
@@ -177,7 +181,7 @@ ggplot(data = coffee_data, aes(x = Qualityclass, group = harvested)) +
   labs(x = "Quality of Coffee", y = "Proportion")
 ```
 
-
+As can be seen above, the good quality coffee harvested more than poor quality coffee in total.
 
 
 
