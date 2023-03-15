@@ -71,7 +71,7 @@ coffee_data %>%
       United States (Puerto Rico)  50.0%   (1)  50.0%   (1)
                           Vietnam  57.1%   (4)  42.9%   (3)
 
-Inorder to get a clear picture of which countries coffee beans are
+In order to get a clear picture of which countries coffee beans are
 mostly of good and bad quality, we can plot the quality based on the
 country of origin in gradient scale.
 
@@ -185,7 +185,8 @@ ggplot(data = coffee_data, aes(x = Qualityclass, y =    category_two_defects)) +
 ![](DAS-Group-12_files/figure-gfm/plotting%20category%20two%20defect-1.png)<!-- -->
 
 As we can see, category 2 type defects were more in poor quality coffee
-beans.
+beans.And there is no difference mean from the two distribution. For the
+futher analysis, we consider to remove this variable.
 
 ### Mean altitude of the growers farm
 
@@ -332,7 +333,7 @@ summary()
 
         Null deviance: 1188.88  on 857  degrees of freedom
     Residual deviance:  426.01  on 818  degrees of freedom
-      (174 observations deleted due to missingness)
+      (因为不存在，174个观察量被删除了)
     AIC: 506.01
 
     Number of Fisher Scoring iterations: 17
@@ -376,7 +377,7 @@ summary()
 
         Null deviance: 1188.88  on 857  degrees of freedom
     Residual deviance:  516.51  on 851  degrees of freedom
-      (174 observations deleted due to missingness)
+      (因为不存在，174个观察量被删除了)
     AIC: 530.51
 
     Number of Fisher Scoring iterations: 7
@@ -414,7 +415,7 @@ summary()
 
         Null deviance: 1188.88  on 857  degrees of freedom
     Residual deviance:  516.75  on 852  degrees of freedom
-      (174 observations deleted due to missingness)
+      (因为不存在，174个观察量被删除了)
     AIC: 528.75
 
     Number of Fisher Scoring iterations: 7
@@ -452,7 +453,7 @@ summary()
 
         Null deviance: 1205.70  on 869  degrees of freedom
     Residual deviance:  523.68  on 865  degrees of freedom
-      (162 observations deleted due to missingness)
+      (因为不存在，162个观察量被删除了)
     AIC: 533.68
 
     Number of Fisher Scoring iterations: 7
@@ -823,14 +824,14 @@ plot_model(mod.final, show.values = TRUE, transform = NULL,
 
 We interpret the odds ratios as follows:
 
-- for each unit increase in the aroma grade of the coffee, their odds of
-  being good quality coffee increases (by a factor of 4.30),
+-   for each unit increase in the aroma grade of the coffee, their odds
+    of being good quality coffee increases (by a factor of 4.30),
 
-- for each unit increase in the flavor grade of the coffee, the odds of
-  it being good quality coffee increases (by a factor of 7.15),
+-   for each unit increase in the flavor grade of the coffee, the odds
+    of it being good quality coffee increases (by a factor of 7.15),
 
-- the more acidic the coffee, their odds of being good quality coffee
-  increases (by a factor of 3.16)
+-   the more acidic the coffee, their odds of being good quality coffee
+    increases (by a factor of 3.16)
 
 ### Probability of the coffee being good quality by 3 factors:
 

@@ -155,7 +155,9 @@ ggplot(data = coffee_data, aes(x = Qualityclass, y =    category_two_defects)) +
        y = "category_two_defects")
 ```
 
-As we can see, category 2 type defects were more in poor quality coffee beans.
+As we can see, category 2 type defects were more in poor quality coffee beans.And
+there is no difference mean from the two distribution. For the futher analysis, we
+consider to remove this variable.
 
 
 ### Mean altitude of the growers farm
