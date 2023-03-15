@@ -54,7 +54,7 @@ coffee_data %>%
 
 ```
 
-Inorder to get a clear picture of which countries coffee beans are mostly of good and bad quality, we can plot the quality based on the country of origin in gradient scale.
+In order to get a clear picture of which countries coffee beans are mostly of good and bad quality, we can plot the quality based on the country of origin in gradient scale.
 
 ```{r plotting origin}
 
