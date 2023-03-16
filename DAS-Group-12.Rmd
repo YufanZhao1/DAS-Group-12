@@ -29,8 +29,8 @@ library(broom)
 The data set here, is coming from the Coffee Quality Database which is a database that contains information from the Coffee
 Quality Institute which is a non-profit organisation working internationally to improve the quality of coffee and the
 lives of the people who produce it.
-Here, in this project, we are trying to answer the question "What influence do different features of coffee have on whether the quality of a batch of coffee is classified
-as good or poor?"  
+Here, in this project, we are trying to answer the question "What influence do different features of coffee have on whether the quality of a batch of coffee is classified as good or poor?"  
+
 For this purpose, firstly, we read the data set.
 
 ```{r reading data,echo=TRUE}
@@ -108,6 +108,7 @@ ggplot(data = coffee_data, aes(x = Qualityclass, y = aroma)) +
        x = "Quality Class",
        y = "Aroma")
 ```
+
 From the boxplot above, we can see that a low value of aroma of the coffee corresponds to poor quality.
 
 Please note that for the rest of boxplot figure, we use the rescaled data in order to make the clearer representation of the distribution.
@@ -175,6 +176,9 @@ ggplot(data = coffee_data, aes(x = Qualityclass, y =    altitude_mean_meters)) +
 
 From the boxplot, we can analyse that as the mean altitude increases, the coffee quality also increases.
 
+
+
+
 ### Year Harvested
 ```{r plotting year harversted}
 ggplot(data = coffee_data, aes(x = Qualityclass, group = harvested)) + 
@@ -185,7 +189,10 @@ ggplot(data = coffee_data, aes(x = Qualityclass, group = harvested)) +
 ```
 
 
+As can be seen above, the good quality coffee harvested more than poor quality coffee in total. But there is no significant difference between them.
 
+
+In gengeral, we can find that there is no difference on means of Category 2 defects. Moreover, country of origin and year harvested are category variables. So the three variables can be removed to make the model more effective. But we need to investigate more to decide the final model.
 
 
 
@@ -207,7 +214,11 @@ mod.coffee1 %>%
 summary()
 ```
 
-As we can see, if we consider the country of origin, that would be way too many explanatory variables. So, lets remove that particular variable and fit the model again.
+
+Firstly, we build a model with all variables.
+
+Then, we exclude three suspected variables(country of origin, year harvested and category of two defect) one by one to build 3 models and compare them.
+
 
 Model 2 (excluding **Country of origin**).
 ```{r generalized model 2}
@@ -285,6 +296,7 @@ Now, lets look at the summary of model 3:
 #Presenting summary model 3
 summ(mod.coffee3)
 ```
+
 Now, lets take a look at the confidence intervals of the explanatory variables:
 ```{r confidence interval}
 confint(mod.coffee3)%>%
@@ -308,6 +320,7 @@ mod.final %>%
 summary()
 ```
 We can see that all the variables are significant and the AIC value is 650.46
+
 
 ### Log odds plot
 
@@ -338,8 +351,8 @@ plot_model(mod.final, type = "pred", title = "Probability of coffee quality bein
             axis.title = c(mod.final$colnumes,"Prob. of coffee quality being good")) 
 ```
 
-
-
+As can be seen above, the coffee will become better if aroma, flavor and acidity become better. 
+The three probability curves are similar, all rising steadily and then rising sharply around 6.
 
 
 

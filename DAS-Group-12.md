@@ -10,7 +10,8 @@ which is a non-profit organisation working internationally to improve
 the quality of coffee and the lives of the people who produce it. Here,
 in this project, we are trying to answer the question “What influence do
 different features of coffee have on whether the quality of a batch of
-coffee is classified as good or poor?”  
+coffee is classified as good or poor?”
+
 For this purpose, firstly, we read the data set.
 
 ``` r
@@ -125,9 +126,10 @@ ggplot(data = coffee_data, aes(x = Qualityclass, y = aroma)) +
        y = "Aroma")
 ```
 
-![](DAS-Group-12_files/figure-gfm/plotting%20aroma2-1.png)<!-- --> From
-the boxplot above, we can see that a low value of aroma of the coffee
-corresponds to poor quality.
+![](DAS-Group-12_files/figure-gfm/plotting%20aroma2-1.png)<!-- -->
+
+From the boxplot above, we can see that a low value of aroma of the
+coffee corresponds to poor quality.
 
 Please note that for the rest of boxplot figure, we use the rescaled
 data in order to make the clearer representation of the distribution.
@@ -215,6 +217,16 @@ ggplot(data = coffee_data, aes(x = Qualityclass, group = harvested)) +
 ```
 
 ![](DAS-Group-12_files/figure-gfm/plotting%20year%20harversted-1.png)<!-- -->
+
+As can be seen above, the good quality coffee harvested more than poor
+quality coffee in total. But there is no significant difference between
+them.
+
+In gengeral, we can find that there is no difference on means of
+Category 2 defects. Moreover, country of origin and year harvested are
+category variables. So the three variables can be removed to make the
+model more effective. But we need to investigate more to decide the
+final model.
 
 ## Formal Analysis
 
@@ -333,14 +345,16 @@ summary()
 
         Null deviance: 1188.88  on 857  degrees of freedom
     Residual deviance:  426.01  on 818  degrees of freedom
-      (因为不存在，174个观察量被删除了)
+      (174 observations deleted due to missingness)
     AIC: 506.01
 
     Number of Fisher Scoring iterations: 17
 
-As we can see, if we consider the country of origin, that would be way
-too many explanatory variables. So, lets remove that particular variable
-and fit the model again.
+Firstly, we build a model with all variables.
+
+Then, we exclude three suspected variables(country of origin, year
+harvested and category of two defect) one by one to build 3 models and
+compare them.
 
 Model 2 (excluding **Country of origin**).
 
@@ -377,7 +391,7 @@ summary()
 
         Null deviance: 1188.88  on 857  degrees of freedom
     Residual deviance:  516.51  on 851  degrees of freedom
-      (因为不存在，174个观察量被删除了)
+      (174 observations deleted due to missingness)
     AIC: 530.51
 
     Number of Fisher Scoring iterations: 7
@@ -415,7 +429,7 @@ summary()
 
         Null deviance: 1188.88  on 857  degrees of freedom
     Residual deviance:  516.75  on 852  degrees of freedom
-      (因为不存在，174个观察量被删除了)
+      (174 observations deleted due to missingness)
     AIC: 528.75
 
     Number of Fisher Scoring iterations: 7
@@ -453,7 +467,7 @@ summary()
 
         Null deviance: 1205.70  on 869  degrees of freedom
     Residual deviance:  523.68  on 865  degrees of freedom
-      (因为不存在，162个观察量被删除了)
+      (162 observations deleted due to missingness)
     AIC: 533.68
 
     Number of Fisher Scoring iterations: 7
@@ -824,14 +838,14 @@ plot_model(mod.final, show.values = TRUE, transform = NULL,
 
 We interpret the odds ratios as follows:
 
--   for each unit increase in the aroma grade of the coffee, their odds
-    of being good quality coffee increases (by a factor of 4.30),
+- for each unit increase in the aroma grade of the coffee, their odds of
+  being good quality coffee increases (by a factor of 4.30),
 
--   for each unit increase in the flavor grade of the coffee, the odds
-    of it being good quality coffee increases (by a factor of 7.15),
+- for each unit increase in the flavor grade of the coffee, the odds of
+  it being good quality coffee increases (by a factor of 7.15),
 
--   the more acidic the coffee, their odds of being good quality coffee
-    increases (by a factor of 3.16)
+- the more acidic the coffee, their odds of being good quality coffee
+  increases (by a factor of 3.16)
 
 ### Probability of the coffee being good quality by 3 factors:
 
@@ -853,3 +867,7 @@ plot_model(mod.final, type = "pred", title = "Probability of coffee quality bein
     $acidity
 
 ![](DAS-Group-12_files/figure-gfm/probability-3.png)<!-- -->
+
+As can be seen above, the coffee will become better if aroma, flavor and
+acidity become better. The three probability curves are similar, all
+rising steadily and then rising sharply around 6.
