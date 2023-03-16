@@ -181,9 +181,10 @@ ggplot(data = coffee_data, aes(x = Qualityclass, group = harvested)) +
   labs(x = "Quality of Coffee", y = "Proportion")
 ```
 
-As can be seen above, the good quality coffee harvested more than poor quality coffee in total.
+As can be seen above, the good quality coffee harvested more than poor quality coffee in total. But there is no significant difference between them.
 
 
+In gengeral, we can find that the distributions of country of origin, year harvested and category of two defect are not significantly different. But we need to investigate more to decide the latest model.
 
 
 ## Formal Analysis {#sec:FA}
@@ -203,6 +204,10 @@ mod.coffee1 <- glm(binary_response ~ country_of_origin +
 mod.coffee1 %>%
 summary()
 ```
+
+Firstly, we build a model with all variables. However, we can try to remove insignificant variables to make the model more effective.
+
+Then, we exclude three insignificant variables(country of origin, year harvested and category of two defect) one by one.
 
 
 
@@ -334,8 +339,8 @@ plot_model(mod.final, type = "pred", title = "Probability of coffee quality bein
 ```
 
 
-
-
+As can be seen above, the coffee will become better if aroma, flavor and acidity become better. 
+The three probability curves are similar, all rising steadily and then rising sharply around 6.
 
 
 
