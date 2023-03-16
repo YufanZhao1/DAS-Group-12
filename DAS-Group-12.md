@@ -222,9 +222,11 @@ As can be seen above, the good quality coffee harvested more than poor
 quality coffee in total. But there is no significant difference between
 them.
 
-In gengeral, we can find that the distributions of country of origin,
-year harvested and category of two defect are not significantly
-different. But we need to investigate more to decide the final model.
+In gengeral, we can find that there is no difference on means of
+Category 2 defects. Moreover, country of origin and year harvested are
+category variables. So the three variables can be removed to make the
+model more effective. But we need to investigate more to decide the
+final model.
 
 ## Formal Analysis
 
@@ -348,10 +350,9 @@ summary()
 
     Number of Fisher Scoring iterations: 17
 
-Firstly, we build a model with all variables. However, we can try to
-remove insignificant variables to make the model more effective.
+Firstly, we build a model with all variables.
 
-Then, we exclude three insignificant variables(country of origin, year
+Then, we exclude three suspected variables(country of origin, year
 harvested and category of two defect) one by one to build 3 models and
 compare them.
 
