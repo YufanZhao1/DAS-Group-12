@@ -1,5 +1,5 @@
 ---
-title: "Find the factor of good quality coffee!"
+title: "The factors for a good quality coffee!"
 author: "Group 12"
 #output: html_document
 output: github_document
