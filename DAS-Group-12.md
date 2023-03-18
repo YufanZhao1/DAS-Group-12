@@ -1,4 +1,4 @@
-Find the factor of good quality coffee!
+The factors for a good quality coffee!
 ================
 Group 12
 
@@ -81,7 +81,8 @@ country of origin in gradient scale.
 
 ggplot(coffee_data, aes(y = Qualityclass)) +
   geom_bar(aes(fill = country_of_origin), position = position_stack(reverse = TRUE)) +
-  theme(legend.position = "top")+
+  theme(legend.position = "top", legend.key.size = unit(0.5, "cm"))+
+  guides(fill = guide_legend(ncol = 3))+
   scale_color_gradient(low = "yellow", high = "green")+
   labs(x = "Proportion of Country of Origin", y = "Quality of Coffee")
 ```
@@ -528,8 +529,8 @@ bind_rows(model.comp.values.1, model.comp.values.2,
 Model comparison values for different models
 
 To choose the best fit for our model, we choose the model with low AIC,
-BIC and large deviance. From the table above, we can see that model 1
-has the highest BIC, so model 3 is the best fit compared to the erst.
+BIC and low deviance. From the table above, we can see that model 1 has
+the highest BIC, so model 3 is the best fit compared to the erst.
 
 Now, lets look at the summary of model 3:
 
