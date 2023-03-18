@@ -1,4 +1,4 @@
-Find the factors of good quality coffee!
+The factors for a good quality coffee!
 ================
 Group 12
 
