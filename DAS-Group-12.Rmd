@@ -1,10 +1,10 @@
 ---
-title: "The factors for a good quality coffee!"
+title: "Find the factors for a good quality coffee!"
 author: "Group 12"
 #output: html_document
 output: 
-  github_document: default
   pdf_document: default
+  github_document: default
 ---
 
 
