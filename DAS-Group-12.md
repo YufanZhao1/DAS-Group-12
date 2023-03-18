@@ -81,7 +81,8 @@ country of origin in gradient scale.
 
 ggplot(coffee_data, aes(y = Qualityclass)) +
   geom_bar(aes(fill = country_of_origin), position = position_stack(reverse = TRUE)) +
-  theme(legend.position = "top")+
+  theme(legend.position = "top", legend.key.size = unit(0.5, "cm"))+
+  guides(fill = guide_legend(ncol = 3))+
   scale_color_gradient(low = "yellow", high = "green")+
   labs(x = "Proportion of Country of Origin", y = "Quality of Coffee")
 ```
